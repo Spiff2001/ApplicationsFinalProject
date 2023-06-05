@@ -1,0 +1,253 @@
+/* ideas for button styling came from Federico Dossena at https://fdossena.com/?p=html5cool/buttons/i.frag */
+/* and Harshii Patel at https://css-tricks.com/css-link-hover-effects/ */
+
+
+/* further credit to Manuel Pinto for the animated CSS background, and NetNinja for helping me with firebase */
+
+body{
+  width: 100vw;
+  height:100vh;
+  overflow-x: hidden;
+  width: 100vw;
+}
+
+
+h1 {
+  margin: 0;
+  padding: 200px 0;
+  font: 30px "Arial";
+  color: #00203FFF;
+  text-align: left;
+}
+
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+#grid {
+  height: 100vh;
+  position:absolute;
+  top:0px;
+  right:0px;
+  bottom:0px;
+  left:0px;
+}
+
+#sidebar {
+  background: #00203FFF;
+}
+/* Manuel Pinto is awesome!! */
+#main {
+  line-height:10px;
+  display: grid;
+  gap: 100px;
+  grid-template-rows: repeat(1, 200px);
+  grid-auto-flow: column;
+  grid-auto-columns: 300px 100px;
+  /* border: 3rem solid rgb(0 0 0 / 10%);  */
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+	height: 100vh;  
+  overflow-y: hidden;
+}
+
+.Home video{
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+#right{
+  display: flex;
+  flex-direction: column;
+  vertical-align: top;
+  margin-left: 200px;
+  overflow-y: scroll;
+  height: 100vh; 
+  width: 40vw;
+ 
+}
+#left{
+  display: flex;
+  flex-direction: column;
+  vertical-align: top;
+  overflow-y: scroll;
+  height: 860px; 
+  width: 50vw;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+
+/* the magic */
+#grid {
+  transition: 300ms;
+  display: grid;
+  grid-template-columns: 48px auto;
+}
+
+#grid:has(#sidebar:hover) {
+  grid-template-columns: 12% auto;
+}
+/* magic + CSS variable */
+#grid {
+  transition: 300ms;
+  display: grid;
+  grid-template-columns: var(--left, 100px) auto;
+}
+
+#grid:has(#sidebar:hover) {
+  --left: 30%;
+}
+
+/* div styling */
+
+
+
+div.div1{
+  margin-top: 25px;
+  text-indent: 80px;
+  white-space: wrap;
+  margin-left: 100px;
+  color: white;
+  border-radius:  15px 50px 30px;
+  background: #00203FFF;
+  padding: 20px;
+  width: 300px;
+  height: 220px;
+  line-height: 2.4;
+}
+
+div.div2{
+  
+  text-indent: 80px;
+  white-space: wrap;
+  margin-left: 500px;
+  color: white;
+  border-radius:  35px 50px 15px;
+  background: #00203FFF;
+  padding: 20px;
+  width: 300px;
+  height: 180px;
+  line-height: 2.4;
+}
+
+.button-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+/* button styling */
+
+button.button3{
+
+  background-color: transparent;
+  
+  display:inline-block;
+  padding:0.5em 3em;
+  border:0.16em solid #FFFFFF; 
+  /* this controls border */
+  margin:0 0.3em 0.3em 0;
+  box-sizing: border-box;
+  text-decoration:none;
+  text-transform:uppercase;
+  font-family:'Roboto',sans-serif;
+  font-weight:400;
+  color: #FFFFFF; 
+  /* this controls the border */
+  text-align:center;
+  transition: all 0.15s;
+  }
+  button.button3:hover{
+  color:  #ADEFD1FF;
+  border-color: #ADEFD1FF;
+  
+  }
+  button.button3:active{
+  color:  #ADEFD1FF;
+  border-color:  #ADEFD1FF;
+  }
+
+button.button4{
+    text-orientation: upright;
+    background-color: transparent;
+    display:inline-block;
+    padding:0.5em 3em;
+    border:0.16em solid #FFFFFF; 
+    /* this controls border */
+    margin:0 0.3em 0.3em 0;
+    box-sizing: border-box;
+    text-decoration:none;
+    text-transform:uppercase;
+    font-family:'Roboto',sans-serif;
+    font-weight:400;
+    color: #FFFFFF; 
+    /* this controls the border */
+    text-align:center;
+    transition: all 0.15s;
+    }
+    button.button4:hover{
+    color:  #ADEFD1FF;
+    border-color: #ADEFD1FF;
+    
+    }
+    button.button4:active{
+    color:  #ADEFD1FF;
+    border-color:  #ADEFD1FF;
+    }
+
+    button.button5{
+      text-orientation: upright;
+      background-color: transparent;
+      display:inline-block;
+      padding:0.5em 3em;
+      border:0.16em solid #FFFFFF; 
+      /* this controls border */
+      margin:0 0.3em 0.3em 0;
+      box-sizing: border-box;
+      text-decoration:none;
+      text-transform:uppercase;
+      font-family:'Roboto',sans-serif;
+      font-weight:400;
+      color: #FFFFFF; 
+      /* this controls the border */
+      
+      align-self: center;
+      transition: all 0.15s;
+      }
+      button.button5:hover{
+      color:  #ADEFD1FF;
+      border-color: #ADEFD1FF;
+      
+      }
+      button.button5:active{
+      color:  #ADEFD1FF;
+      border-color:  #ADEFD1FF;
+      }
+
+    .App video{
+      position: absolute;
+      left: 100px;
+    }
