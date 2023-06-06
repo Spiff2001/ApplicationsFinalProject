@@ -1,7 +1,5 @@
 import "./App.css";
 import react, { useEffect, useState } from "react";
-import axios from "axios";
-import bgAnimation from "./spiderBotAnimated.mp4";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import {
@@ -12,6 +10,7 @@ import {
   deleteDoc,
   updateDoc,
   doc,
+  enableIndexedDbPersistence,
 } from "firebase/firestore";
 import {
   getAuth,
@@ -57,15 +56,16 @@ const Home = () => {
   const [password, setPassword] = useState();
   const [loggedIn, setLoggedIn] = useState();
   //"project" items have an auto generated ID, a name, a description (desc), and a to do next (next)
-  let data = [];
+
   const getDocuments = async () => {
+    let data = [];
     getDocs(colRef)
       .then((snapshot) => {
         snapshot.docs.forEach((doc) => {
           data.push({ ...doc.data(), id: doc.id });
-          setProjectArray(data);
         });
         console.log(data);
+        setProjectArray(data);
         const projectDivs = data.map((element) => (
           <div class="div1">
             Name: {element.name}
@@ -73,23 +73,26 @@ const Home = () => {
             Description: {element.desc}
             <br></br>
             To Do Next: {element.next}
-            <br></br>
-            <button
-              class="button5"
-              onClick={() => {
-                data.forEach((project) => {
-                  console.log(project.name);
-                  if (project.name === element.name) {
-                    deleteDoc(doc(db, "project", element.id));
-                    console.log(element.name + " has been deleted");
-                    getDocuments();
-                  }
-                });
-              }}
-            >
-              delete
-            </button>
-          </div>
+
+  {
+              <button class="button5"
+                
+                onClick={() => {
+                  data.forEach((project) => {
+                    console.log(project.name);
+                    if (project.name == element.name) {
+                      deleteDoc(doc(db, 'project', element.id));
+                      console.log(element.name + " has been deleted");
+                      getDocuments();
+                    }
+                  });
+                }}
+                >
+                delete
+                </button> 
+  }
+           </div>
+
         ));
         setProjects(projectDivs);
       })
@@ -97,10 +100,13 @@ const Home = () => {
         console.log(err.message);
       });
   };
+  
 
   useEffect(() => {
     console.log("useEffect ran");
     getDocuments();
+    console.log("project array: ", projectArray);
+    
   }, []);
 
   return (
@@ -197,31 +203,26 @@ const Home = () => {
                   <div className="button-container">
                     <button
                       class="button3"
-                      
                       onClick={() => {
+                        setUpdateID("");
                         projectArray.forEach((project) => {
-                          setUpdateID(" ");
                           if (updateProjName === project.name) {
                             setUpdateID(project.id);
                             console.log(updateID);
                           }
                         });
-                        if (updateID) {
-                          let docRef = doc(
-                            db,
-                            "project",
-                            updateID
-                          );
+                        
+                          let docRef = doc(db, "project", updateID);
                           updateDoc(docRef, {
                             desc: updateProjDesc,
                             next: updateProjNext,
-                          }).then(() => {
-                            getDocuments();
-                          });
+                          })
+                          getDocuments();
                           setUpdateProjName("");
                           setUpdateProjNext("");
                           setUpdateProjDesc("");
-                        }
+                        
+                        
                       }}
                     >
                       Update Project
@@ -287,9 +288,7 @@ const Home = () => {
             ) : (
               <>
                 <h1>Log In or Sign Up to view projects</h1>
-                {/* <video autoPlay loop muted>
-                    <source src={bgAnimation} type="video/mp4" />
-                </video> */}
+               
               </>
             )}
           </div>
